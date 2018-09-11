@@ -54,6 +54,35 @@
 
     });
 
+
+
+    app.get('/update/:id', (req, res) => {
+        var id = req.params.id;
+        //id = parseInt(id);
+            id = toString(id);
+    taskSchema
+        .findOneAndUpdate({
+            'id':  id  // search query
+        }),
+        {
+            'id': id // field value to update
+        },
+        {
+            new:true
+        }
+        .then(doc => {
+            console.log(doc)
+            res.send({'message':doc}) 
+
+        })
+        .catch(err => {
+            console.error(err)
+            res.send({'message':doc}) 
+
+        })
+
+    });
+
     app.get('/delete/:id', (req, res) => {
         var id = req.params.id;
 
